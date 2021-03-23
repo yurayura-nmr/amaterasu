@@ -5,7 +5,6 @@ def correctNumbering(self, fidFilenames):
     Takes:     array       fidFilenames: unordered filenames
     Returns:   array       fidFilenames: filenames, integer-sorted
     """
- 
     fidNumbers = []
     
     for filename in fidFilenames:
