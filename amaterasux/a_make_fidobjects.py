@@ -3,14 +3,13 @@ from a_cout import *
 
 import sys
 
-
 def makeFidObjects(residue, experiment):
     """
     Generate FID objects for current residue spin-locked data (usually >19)
     """
-
     numberFids = len(experiment.fidFilenames)
-    fidsPerResidue = len(experiment.valist)
+    fidsPerResidue = len(experiment.valist) # need to add that even at 1 power, there might be lots of experiments if the offset is varied
+    #fidsPerResidue = len(experiment.valist) * NUMBER_OF_OFFSET
 
     nprint("Number of residues     ", experiment.TD4)
     nprint("Number of FIDs/residue ", fidsPerResidue)
@@ -23,7 +22,6 @@ def makeFidObjects(residue, experiment):
     """
     The first (n-2) experiments are spin-locked
     """
-
     start = residue.index * fidsPerResidue
     end = start + fidsPerResidue - 2
 
@@ -40,7 +38,6 @@ def makeFidObjects(residue, experiment):
     """
     The next 2 experiments are reference experiments
     """
-
     start = residue.index * fidsPerResidue + (len(experiment.valist) - 2)
     end = start + 2
 
@@ -56,6 +53,5 @@ def makeFidObjects(residue, experiment):
     """
     Store the information in the residue object
     """
-
     residue.fidObjectsData = fidObjectsData
     residue.fidObjectsReference = fidObjectsReference
