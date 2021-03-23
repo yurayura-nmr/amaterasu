@@ -5,13 +5,11 @@ from a_cout import *
 from a_getintensity import *
 from a_consistency import *
 
-
 def getIntAll(residue, args, experiment):
     """
     Obtain intensity of the expected resonance for all 
     spectra (spin-locked data)
     """
-
     print
     nprint('PROC', 'Spin-lock expt.')
     for i in residue.fidObjectsData:
@@ -20,13 +18,11 @@ def getIntAll(residue, args, experiment):
         os.chdir('../..')
     print
 
-
 def getIntAllRef(residue, args, experiment):
     """
     Obtain intensity of the expected resonance for all 
     spectra (reference)
     """
-
     print
     nprint('PROC', 'Reference expt.')
     for i in residue.fidObjectsReference:
@@ -35,12 +31,10 @@ def getIntAllRef(residue, args, experiment):
         os.chdir('../..')
     print
 
-
 def getIntensity(fid, residue, args):
     """
     Determine intensity for current fid/spectrum object.
     """
-
     nprint("Spectrum ", fid.specFilename)
 
     os.system("cp " + fid.specFilename + " ./test.ft")
@@ -49,7 +43,6 @@ def getIntensity(fid, residue, args):
     """
     Extract all peak intensities from nmrpipe peak picking report
     """
-
     intensities = np.empty((0, 1), float)
     peaksPickedPPM = np.empty((0, 1), float)
 
@@ -58,7 +51,6 @@ def getIntensity(fid, residue, args):
     """
     Header length of test.tab depends on 1D or 2D experiment
     """
-
     headerLength = 18
     intColumnIdx = 17
     ppmColumnIdx = 5
@@ -78,15 +70,13 @@ def getIntensity(fid, residue, args):
     """
     If nmrWish did not find any peaks, set intensity to 0.
     """
-
     if len(intensities) == 0:
-        nprint("NOTE", "No peak found in spectrum.")
+        nprint("[NOTE]", "No peak found in spectrum.")
         intensities = np.vstack([intensities, 0])
 
     """
     Select correct peak based on proton chemical shift.
     """
-
     selectedIntensity, selectedPPM = selectCorrectPeak(fid,
                                                        peaksPickedPPM,
                                                        intensities,
@@ -95,19 +85,16 @@ def getIntensity(fid, residue, args):
     """
     Store final intensity and ppm values.
     """
-
     fid.intensity = selectedIntensity
     fid.wH_observed = selectedPPM
 
     """
     Verbose output.
     """
-
     print
     nprint("Peak expected at [1H, ppm] ", residue.wH)
     nprint("Peak found    at [1H, ppm] ", fid.wH_observed)
     nprint("Peak intensity ", fid.intensity)
-
 
 def selectCorrectPeak(fid, peaksPickedPPM, intensities, residue):
     """
@@ -139,7 +126,6 @@ def selectCorrectPeak(fid, peaksPickedPPM, intensities, residue):
             peaksPickedPPM = np.delete(peaksPickedPPM, trialIndex)
 
     return selectedIntensity, selectedPPM
-
 
 def selectMaxPeak(intensities, ppmPicked):
     """
