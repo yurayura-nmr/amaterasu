@@ -1,6 +1,5 @@
 from a_cout import err
 
-
 def readFile(filename):
     """
     Read file into array.
@@ -9,7 +8,6 @@ def readFile(filename):
     Takes:      string      filename
     Returns:    array       columns of the read file
     """
-
     array = []
 
     try:
