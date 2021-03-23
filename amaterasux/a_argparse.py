@@ -24,7 +24,7 @@ def parseArguments():
     # Off-resonance expt. not yet implemented.
     parser.add_argument("-off",
                         help="experiment is an off-resonance experiment",
-                        action="store_true")
+                        action="store_true") # testing
    
     parser.add_argument("-m",
                         help="manually apply a first order phase correction; specify with [--p0]",
