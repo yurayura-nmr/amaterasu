@@ -66,14 +66,13 @@ exit
 
 """
 
-
 def makePeakPickTcl(args, experiment):
     """
+    Using NMRPipe for peak picking.
     Fill into the template script the region of interest
     (ROI) based on ZF and TD (amide region is approx. 0.37 * TD)
     Adjust by division by 2
     """
-
     ROI = experiment.ROI
 
     foldername = experiment.dataDir
