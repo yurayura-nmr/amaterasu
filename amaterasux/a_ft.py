@@ -3,28 +3,23 @@ import nmrglue as ng
 
 from a_cout import *
 
-
 def ftAll(residue, args, experiment):
     """
     Fourier transform all spectra (spin-locked data)
     """
-
     for i in residue.fidObjectsData:
         os.chdir(experiment.dataDir + '/fid')
         FourierTransform(i, residue, args, experiment)
         os.chdir('../..')
 
-
 def ftAllRef(residue, args, experiment):
     """
-    Fourier transform all spectra (reference)
+    Fourier transform all spectra (reference spectra; no spin-lock block)
     """
-
     for i in residue.fidObjectsReference:
         os.chdir(experiment.dataDir + '/fid')
         FourierTransform(i, residue, args, experiment)
         os.chdir('../..')
-
 
 def FourierTransform(fid, residue, args, experiment):
     """
@@ -40,7 +35,6 @@ def FourierTransform(fid, residue, args, experiment):
     DI
     Write output file "_proc.ft2"
     """
-
     p0 = residue.p0
     p1 = residue.p1
 
@@ -53,7 +47,6 @@ def FourierTransform(fid, residue, args, experiment):
     """
     Direct dimension (1H)
     """
-
     if fid.solventFilter is True:
         dic, nmrData = ng.pipe_proc.sol(
             dic, nmrData,
@@ -82,7 +75,6 @@ def FourierTransform(fid, residue, args, experiment):
     """
     Indirect Dimension (15N)
     """
-
     dic, nmrData = ng.pipe_proc.tp(dic, nmrData)
     dic, nmrData = ng.pipe_proc.sp(dic, nmrData,
                                    off=0.5,
