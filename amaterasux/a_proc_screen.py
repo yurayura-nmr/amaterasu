@@ -8,13 +8,11 @@ from a_phase import *
 
 import sys
 
-
 def screenResidue(residue, args, experiment):
     """
     Process the dataset with its corresponding reference dataset.
-    Using manual or automatic phase correction
+    Using manual or automatic phase correction.
     """
-
     makePeakPickTcl(args, experiment)
     makeFidObjects(residue, experiment)
 
@@ -30,11 +28,9 @@ def screenResidue(residue, args, experiment):
     Fourier Transform all FIDs
     Currently Amaterasu treats the screening FIDs internally as "reference".
     """
-
     ftAllRef(residue, args, experiment)
 
     """
     Get intensities for all peaks in the spectra
     """
-
     getIntAllRef(residue, args, experiment)
