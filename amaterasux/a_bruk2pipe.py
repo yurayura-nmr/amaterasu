@@ -1,7 +1,6 @@
 import os
 from a_cout import *
 
-
 def makeFidCom(experiment):
     """
     Make fid.com file (Bruker to nmrPipe conversion)
@@ -24,7 +23,6 @@ def makeFidCom(experiment):
     In the pseudo-4D acquisition mode currently implemented, the 15N offset is arbitrary.
     Here, we simply set the offset to 100 ppm.
     """
-
     experiment.wN = 100.00
 
     fidCom = fidCom.replace('DECIM',     str(experiment.decim))
@@ -49,13 +47,11 @@ def makeFidCom(experiment):
 
     experiment.fidComString = fidCom
 
-
 def fidCom(experiment):
     """
     Make and execute fid.com in reference or data directory
     Stay in the directory for the next step.
     """
-
     nprint('CONVERT', 'Bruker ---> nmrPipe format')
 
     os.chdir(experiment.dataDir)
