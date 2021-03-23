@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def dBtoHz(residue, valist_dB):
     """
     Convert spin-lock power values from decibel (dB) to Hz.
@@ -8,7 +7,6 @@ def dBtoHz(residue, valist_dB):
     Takes:      array      valist_dB: valist in Decibel
     Returns:    array      valist_Hz: valist in Hertz
     """
-
     valist_Hz = []
 
     Npulse_dB = float(residue.N15pulseDB)
@@ -16,8 +14,7 @@ def dBtoHz(residue, valist_dB):
 
     for i in valist_dB:
         dB = float(i[0])
-        Hz = round(1 / ((np.power(10, ((float(dB) - float(Npulse_dB)
-                                        ) / 20)) / 250000) * float(Npulse_length)))
+        Hz = round(1 / ((np.power(10, ((float(dB) - Npulse_dB) / 20)) / 250000) * Npulse_length))
 
         valist_Hz.append(Hz)
 
