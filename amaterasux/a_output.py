@@ -3,7 +3,6 @@ import sys
 
 from a_cout import *
 
-
 def writeIntFileHeader(residue, experiment):
     """
     Write intensity file for GLOVE
@@ -12,63 +11,59 @@ def writeIntFileHeader(residue, experiment):
     Line 3: spinlock power    [Hz]
     Line 4: spinlock offset   [Hz]
     """
-
     IntFile = open('./Int_r1rho' + '.txt', 'w')
 
     line1 = str(experiment.BF3)
-    line2 = "0 0"  # Reference
-    line3 = "0 0"  # Reference
-    line4 = "0 0 "
+    line2 = "0 0"  # Reference has no spin-lock, thus no duration
+    line3 = "0 0"  # Reference has no spin-lock, thus no power
+    line4 = "0 0 " # Reference has no spin-lock, thus no offset
 
     """
     Write non-reference spinlock powers to table
 
-    Off-resonance R1rho dispersion is not implemented yet. 
-    Thus, line 4 = 0 0 0 ...
+    Trying to implement off-resonance R1rho dispersion. 
+    The offset goes into line 4.
     """
-
     for i in residue.fidObjectsData:
         i.spinlockHz = float(experiment.valist[i.index])
+        
+        # need to read the offset as I read in the powers above
+        #i.spinlockOffset = float(experiment.v????alist[i.index]) # <<-- how to read spinlock offset?
+        
         if int(i.spinlockHz > 0):
             line2 = line2 + " " + str(experiment.spinLockLength)
             line3 = line3 + " " + str(i.spinlockHz)
-            line4 = line4 + "0 "
+            line4 = line4 + " " + str(i.spinlockOffset) # untested
 
     """
     Write header
     """
-
     IntFile.write(line1 + "\n")
     IntFile.write(line2 + "\n")
     IntFile.write(line3 + "\n")
     IntFile.write(line4 + "\n")
 
-
 def writeIntFileLine(residue, experiment):
     """
     Write intensity list for current resonance
     """
-
     intensityLine = "1 " + str(residue.index) + " HN "
 
     """
     Write reference intensity
     """
-
     for i in residue.fidObjectsReference:
         intensityLine += str(i.intensity) + ' '
 
     """
     Write spin-lock dependent intensities
     """
-
     for i in residue.fidObjectsData:
         intensityLine += str(i.intensity) + ' '
 
     IntFile = open('./Int_r1rho.txt', 'a')
     IntFile.write(intensityLine + '\n')
     IntFile.close()
-
 
 def glove(experiment, args):
     """
@@ -109,7 +104,6 @@ def glove(experiment, args):
     store(experiment, cnst=False)
 
     sys.exit()
-
 
 def store(experiment, cnst):
     """
