@@ -1,17 +1,15 @@
 from argparse import ArgumentParser
 import sys
 
-
 def parseArguments():
     """
     Parse command line arguments.
     """
-
     parser = ArgumentParser(
-        description='Amaterasu\'Kai | A program to process R1rho relaxation dispersion data')
+        description='Amaterasu | A program to process R1rho relaxation dispersion data')
 
     parser.add_argument("-r",
-                        help="run Amaterasu\'Kai",
+                        help="run Amaterasu",
                         action="store_true")
 
     parser.add_argument("--data",
@@ -23,13 +21,11 @@ def parseArguments():
                         help="experiment is a screening experiment",
                         action="store_true")
 
-    """
-    Off-resonance expt. not yet implemented.
+    # Off-resonance expt. not yet implemented.
     parser.add_argument("-off",
                         help="experiment is an off-resonance experiment",
                         action="store_true")
-    """
-
+   
     parser.add_argument("-m",
                         help="manually apply a first order phase correction; specify with [--p0]",
                         action="store_true")
