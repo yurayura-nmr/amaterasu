@@ -17,10 +17,8 @@ _ps_peak_minima_score
 
 Copyright Notice and Statement for the nmrglue Project
 
-
 Copyright (c) 2010-2015 Jonathan J. Helmus
 All rights reserved.
-
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -56,7 +54,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
 
-
 def phaseReference(residue, experiment):
     """
     Get a reference FID
@@ -65,7 +62,7 @@ def phaseReference(residue, experiment):
     referenceFid = residue.fidObjectsReference[0]
 
     """
-    Fourier the first dimension of the reference FID without knowing the phase yet
+    Fourier-transform the first dimension of the reference FID without knowing the phase yet
     """
     p0 = 0
     p1 = 0
@@ -111,7 +108,6 @@ def phaseReference(residue, experiment):
 
     return residue
 
-
 def autops(data, fn, p0=0.0, p1=0.0):
     """
     Automatic linear phase correction
@@ -145,7 +141,6 @@ def autops(data, fn, p0=0.0, p1=0.0):
     #phasedspc = ps(data, p0=opt[0])
 
     return phasedspc, opt[0], opt[1]
-
 
 def _ps_acme_score(ph, data):
     """
@@ -199,7 +194,6 @@ def _ps_acme_score(ph, data):
     p = 1000 * pfun
 
     return h1s + p
-
 
 def _ps_peak_minima_score(ph, data):
     """
