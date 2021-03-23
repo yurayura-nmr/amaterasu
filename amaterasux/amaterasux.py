@@ -4,7 +4,7 @@ from a_dependency import *
 
 def main():
     """
-    Go.
+    Check command line arguments and if no problems, start.
     """
     args = parseArguments()
     processData(args)
