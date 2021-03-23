@@ -3,9 +3,7 @@ import os
 
 from a_cout import *
 
-
 def writeScreeningOutput(experiment):
-
     print
 
     os.system('mkdir -p output')
