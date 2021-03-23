@@ -7,14 +7,12 @@ from a_output import *
 
 import sys
 
-
 def processResidue(residue, args, experiment):
     """
     Process the dataset with its corresponding reference dataset.
     Using manual or automatic phase correction
     For automatic phase correction: determine ref. p0, p1 from 1D projection        
     """
-
     makePeakPickTcl(args, experiment)
     makeFidObjects(residue, experiment)
 
@@ -29,21 +27,18 @@ def processResidue(residue, args, experiment):
     """
     Fourier Transform all FIDs
     """
-
     ftAllRef(residue, args, experiment)
     ftAll(residue, args, experiment)
 
     """
     Get intensities for all peaks in the spectra
     """
-
     getIntAllRef(residue, args, experiment)
     getIntAll(residue, args, experiment)
 
     """
     If this is the first residue processed, write the header of the output intensity file.
     """
-
     if residue.index == 0:
         writeIntFileHeader(residue, experiment)
 
