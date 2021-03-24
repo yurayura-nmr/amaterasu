@@ -41,8 +41,7 @@ def writeIntFileHeader(residue, experiment):
             line3 = line3 + " " + str(i.spinlockHz)
             line4 = line4 + " " + str(i.spinlockOffset) # untested
 
-    print line4
-    #sys.exit()
+    print "[Debug Line 4]", line4
 
     """
     Write header
@@ -51,6 +50,7 @@ def writeIntFileHeader(residue, experiment):
     IntFile.write(line2 + "\n")
     IntFile.write(line3 + "\n")
     IntFile.write(line4 + "\n")
+    #sys.exit()
 
 def writeIntFileLine(residue, experiment):
     """
@@ -83,7 +83,7 @@ def glove(experiment, args):
     temperature = str(round(experiment.TE))
 
     IntFile = 'Int_r1rho.txt'
-    sys.exit()
+    #sys.exit()
 
     """
     Case: Matrix model
@@ -91,23 +91,28 @@ def glove(experiment, args):
     r1rho2glove -t MATRIX_ON w1 -i Int_r1rho_.txt 280 > glove.in
     """
 
-    if args.model == 'PALMER05':
-        convertToGlove = 'r1rho2glove -t PALMER05 w1 -i ' + \
-            IntFile + ' ' + temperature + \
-                         ' > glove.in'
-    elif args.model == 'CONST':
-        convertToGlove = 'r1rho2glove -t CONST w1 -i ' + \
-            IntFile + ' ' + temperature + \
-                         ' > glove.in'
-    elif args.model == 'MATRIX':
-        convertToGlove = 'r1rho2glove -t MATRIX_ON w1 -i ' + \
+    if args.off:
+        convertToGlove = 'r1rho2glove -t PALMER05_OFF W -i ' + \
             IntFile + ' ' + temperature + \
                          ' > glove.in'
     else:
-        nprint("No fitting model assigned. Assuming MATRIX form.", "")
-        convertToGlove = 'r1rho2glove -t MATRIX_ON w1 -i ' + \
-            IntFile + ' ' + temperature + \
-                         ' > glove.in'
+        if args.model == 'PALMER05':
+            convertToGlove = 'r1rho2glove -t PALMER05 w1 -i ' + \
+                IntFile + ' ' + temperature + \
+                             ' > glove.in'
+        elif args.model == 'CONST':
+            convertToGlove = 'r1rho2glove -t CONST w1 -i ' + \
+                IntFile + ' ' + temperature + \
+                             ' > glove.in'
+        elif args.model == 'MATRIX':
+            convertToGlove = 'r1rho2glove -t MATRIX_ON w1 -i ' + \
+                IntFile + ' ' + temperature + \
+                             ' > glove.in'
+        else:
+            nprint("No fitting model assigned. Assuming MATRIX form.", "")
+            convertToGlove = 'r1rho2glove -t MATRIX_ON w1 -i ' + \
+                IntFile + ' ' + temperature + \
+                             ' > glove.in'
 
     os.system(convertToGlove)
     os.system('glove -dvx && mplot -PDF')
