@@ -85,6 +85,12 @@ class experiment:
         self.readValist(args)
 
         """
+        Read fq3list
+        """
+        if args.off:
+            self.readFq3list(args)
+
+        """
         Prepare fid.com
         """
 
@@ -125,6 +131,23 @@ class experiment:
         valist = valist[1::2]
 
         self.valist = dBtoHz(self, valist)
+
+    def readFq3list(self, args):
+        """
+        Read fq3list (Spin-lock offset values [Hz])
+        Delete first line "hz sfo" if existing
+        Remove heating compensation entries
+        Convert power values from dB to Hz
+        """
+
+        filename = self.dataDir + '/fq3list'
+
+        fq3list = readFile(filename)
+
+        #if str(fq3list[0][0]) == 'hz sfo':
+        del fq3list[0]
+
+        self.fq3list = fq3list
 
     def readFidFilenames(self):
         """
