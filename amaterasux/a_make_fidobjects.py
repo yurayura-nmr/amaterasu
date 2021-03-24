@@ -8,7 +8,7 @@ def makeFidObjectsOffres(residue, experiment):
     Generate FID objects for current residue spin-locked data (usually >19)
     This function (untested) is for the off-resonance experiment.
     """
-    numberOffsets = len(fq3list) # is that all 178 or is it 176/4 + 2?
+    numberOffsets = len(experiment.fq3list) # is that all 178 or is it 176/4 + 2?
     numberFids = len(experiment.fidFilenames) # x 4?
     
     fidsPerResidue = numberOffsets
