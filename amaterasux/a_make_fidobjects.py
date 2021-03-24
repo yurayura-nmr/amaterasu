@@ -29,7 +29,7 @@ def makeFidObjects(residue, experiment):
     Generate FID objects for current residue spin-locked data (usually >19)
     This function deals with on-resonance R1rho experiments.
     """
-    numberPowers = len.(experiment.valist)
+    numberPowers = len(experiment.valist)
     numberFids = len(experiment.fidFilenames)
     
     fidsPerResidue = numberPowers
