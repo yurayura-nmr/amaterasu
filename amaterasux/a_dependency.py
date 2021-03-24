@@ -39,9 +39,10 @@ def checkModules():
         pass
 
     checkCommand('csh')
-    checkCommand('nmrWish')
-    nprint("[Note]", "If nmrWish is not detected, just run Amaterasu from within tcsh. That should let it find nmrPipe/nmrWish.")
     
+    nprint("[Note]", "If nmrWish is not detected, just run Amaterasu from within csh or tcsh. That should let it find nmrPipe/nmrWish. Alternatively, include nmrPipe in your current shell path.")
+    checkCommand('nmrWish')
+        
     checkCommand('mplot')
     checkCommand('glove')
     checkCommand('r1rho2glove')
