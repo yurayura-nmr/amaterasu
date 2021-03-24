@@ -14,7 +14,11 @@ def processResidue(residue, args, experiment):
     For automatic phase correction: determine ref. p0, p1 from 1D projection        
     """
     makePeakPickTcl(args, experiment)
-    makeFidObjects(residue, experiment)
+    
+    if args.off:
+        makeFidObjectsOffres(residue, experiment)
+    else:
+        makeFidObjects(residue, experiment)
 
     if args.m:
         residue.p0 = args.p0
