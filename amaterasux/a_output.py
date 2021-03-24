@@ -28,12 +28,21 @@ def writeIntFileHeader(residue, experiment):
         i.spinlockHz = float(experiment.valist[i.index])
         
         # need to read the offset as I read in the powers above
-        #i.spinlockOffset = float(experiment.v????alist[i.index]) # <<-- how to read spinlock offset?
+
+        #print experiment.fq3list[3][0]
+        #print len(experiment.fq3list)
+        
+	print "Index", i.index
+
+        i.spinlockOffset = float(experiment.fq3list[i.index][0]) # <<-- how to read spinlock offset?
         
         if int(i.spinlockHz > 0):
             line2 = line2 + " " + str(experiment.spinLockLength)
             line3 = line3 + " " + str(i.spinlockHz)
             line4 = line4 + " " + str(i.spinlockOffset) # untested
+
+    print line4
+    #sys.exit()
 
     """
     Write header
@@ -74,6 +83,7 @@ def glove(experiment, args):
     temperature = str(round(experiment.TE))
 
     IntFile = 'Int_r1rho.txt'
+    sys.exit()
 
     """
     Case: Matrix model
