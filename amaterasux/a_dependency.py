@@ -30,8 +30,10 @@ def checkModules():
 
     import nmrglue
     if nmrglue.__version__ < 0.6:
-        err("nmrglue version found is too low. Version 0.6 or higher is required. Please see INSTALL.txt for instructions how to install nmrglue.")       
+        err("nmrglue version found is too low. Version 0.6 or higher is required. Please see INSTALL.txt for instructions how to install nmrglue.")
     else:
+        # actually, it seems that ONLY 0.6 works for me. 0.7-dev for example throws an error.
+        nprint("[Warning]", "nmrglue higher than required version 0.6 detected. 0.6 works best. Errors happen for 0.7-dev. In these cases, downgrade to 0.6")
         pass
 
     checkCommand('csh')
