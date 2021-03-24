@@ -19,9 +19,60 @@ def makeFidObjectsOffres(residue, experiment):
     nprint("Number of offsets      ", numberOffsets)
     nprint("Total number of FIDs   ", numberFids)
     nprint("Current residue #      ", residue.index)
-    # ...
+    
+    fidObjectsData = list()
+    fidObjectsReference = list()
+
+    """
+    Make spin-locked data first
+
+    (n-2)  experiments are spin-locked
+       2   experiments are reference experiments
+    Order is different than in the on-resonance experiments.
+
+    0     --- first experiment is reference
+    -1000 --- next experiments are not reference
+    ...
+    500
+    0     --- the last experiment is reference again
+    """
+    start = (residue.index * fidsPerResidue) + 1  # 0th experiment is reference; 1st experiment is data
+    end = start + fidsPerResidue - 1
+
+    for i in range(start, end):
+        testFid = fid()
+        testFid.index = i
+        testFid.filename = experiment.fidFilenames[i]
+        testFid.reference = False
+        fidObjectsData.append(testFid)
+        # print testFid.filename
+    #nprint("[Data]", fidObjectsData)
+
+
+    """
+    The first and last experiment are the reference experiments.
+    The next 2 experiments are reference experiments
+    """
+    ref1 = (residue.index * fidsPerResidue)                                 # 0, 179, ... etc are reference data
+    ref2 = (residue.index * fidsPerResidue) + (len(experiment.fq3list) - 1) # 178, ...   are also reference data
+
+    for i in [ref1, ref2]:
+        testFid = fid()
+        testFid.index = i
+        testFid.filename = experiment.fidFilenames[i]
+        testFid.reference = True
+        fidObjectsReference.append(testFid)
+
+    #nprint("[Reference]", fidObjectsReference)
     #test until here then continue
-    sys.exit()
+
+    """
+    Store the information in the residue object
+    """
+    residue.fidObjectsData = fidObjectsData
+    residue.fidObjectsReference = fidObjectsReference
+    
+    #sys.exit()
 
 
 def makeFidObjects(residue, experiment):
