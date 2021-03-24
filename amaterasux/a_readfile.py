@@ -2,7 +2,7 @@ from a_cout import err
 
 def readFile(filename):
     """
-    Read file into array.
+    Read file into array. 
     Ignore empty lines.
 
     Takes:      string      filename
