@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 
 """
-Amaterasu'Kai
+Amaterasu
 
 Pseudo-4D pulseprogram version; using Python2.7
 
