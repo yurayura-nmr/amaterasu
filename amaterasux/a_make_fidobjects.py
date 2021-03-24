@@ -11,17 +11,17 @@ def makeFidObjectsOffres(residue, experiment):
     numberOffsets = len(fq3list) # is that all 178 or is it 176/4 + 2?
     numberFids = len(experiment.fidFilenames) # x 4?
     
-    #fidsPerResidue = len(experiment.valist) # need to add that even at 1 power, there might be lots of experiments if the offset is varied
     fidsPerResidue = numberOffsets
     
     nprint("[Amaterasu]",          "off-resonance experiment")
-    nprint("Number of residues     ", experiment.TD4) # must be 1. Off-resonance expt: 1 data file is for 1 residue
+    nprint("Number of residues     ", experiment.TD4) # same for off-resonance
     nprint("Number of FIDs/residue ", fidsPerResidue)
     nprint("Number of offsets      ", numberOffsets)
     nprint("Total number of FIDs   ", numberFids)
     nprint("Current residue #      ", residue.index)
     # ...
     #test until here then continue
+    sys.exit()
 
 
 def makeFidObjects(residue, experiment):
@@ -29,8 +29,10 @@ def makeFidObjects(residue, experiment):
     Generate FID objects for current residue spin-locked data (usually >19)
     This function deals with on-resonance R1rho experiments.
     """
+    numberPowers = len.(experiment.valist)
     numberFids = len(experiment.fidFilenames)
-    fidsPerResidue = len(experiment.valist)
+    
+    fidsPerResidue = numberPowers
     
     nprint("[Amaterasu]",          "on-resonance experiment")
     nprint("Number of residues     ", experiment.TD4)
