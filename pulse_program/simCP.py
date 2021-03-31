@@ -1,12 +1,16 @@
 import os
 
+"""
+Erik Walinda
+Kyoto University
+Graduate School of Medicine
+
+Creates input scripts and calls SIMPSON to simulate the CP excitation pulse sequence on a user-chosen grid.
+Requires aru_tmp.tcl as a template for the script to be generated.
+"""
+
 NwCP = 40
 HwCP = NwCP
-
-"""
-Creates input scripts and calls SIMPSON to simulate the CP excitation pulse sequence on a user-chosen grid.
-Requires aru_tmp.tcl.
-"""
 
 # offsets
 __OH__ = 1
