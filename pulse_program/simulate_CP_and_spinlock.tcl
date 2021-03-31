@@ -8,7 +8,6 @@ spinsys {
 
 # couplings
   jcoupling 1 2 -93 0 0 0 0 0
-
 }
 
 par {
