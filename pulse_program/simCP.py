@@ -3,14 +3,15 @@ import os
 NwCP = 40
 HwCP = NwCP
 
-# offsets
+"""
+Creates input scripts and calls SIMPSON to simulate the CP excitation pulse sequence on a user-chosen grid.
+Requires aru_tmp.tcl.
+"""
 
+# offsets
 __OH__ = 1
 __ON__ = 1        
 maxTr = 0.0108    # max transfer time
-
-#################################################################
-
 
 def prepareFile(__ON__, __OH__):
     with open("aru_run.tcl", "wt") as fout:
@@ -22,10 +23,6 @@ def prepareFile(__ON__, __OH__):
                 a = a.replace('__OH__', str(__OH__))
                 fout.write(a)
 
-
-#################################################################
-
-
 def getSx(maxTr):
     os.system("simpson ./aru_run.tcl")
     with open("trial.txt", "rt") as fin:
@@ -34,9 +31,6 @@ def getSx(maxTr):
             if columns[0] == str(maxTr):
                 Sx = columns[1]
     return Sx
-
-
-#################################################################
 
 
 matrix = []
