@@ -1,17 +1,14 @@
 #! /usr/bin/env python
 
 """
-
-Amaterasu'Kai
-
-Plotting utility
-
+Erik Walinda
 Kyoto University
 Graduate School of Medicine
-Erik Walinda
+
+Amaterasu
+Plotting utility
 
 Last change: 2018-2-22
-
 """
 
 import nmrglue as ng
@@ -21,16 +18,14 @@ import matplotlib.cm
 
 from matplotlib import rcParams
 
-
 """
 Run-specific parameters (to get from function call)
 By default, one residue has <= 196 data
 """
 
-datapath = "11"
-#w_1H = 8.91
-w_1H = 8.0577 
-base_countour_level = 200000
+datapath = "11"               # folder containing the fid and spectra
+w_1H = 8.0577                 # where is the peak?
+base_countour_level = 200000  # manual setting
 startfid = 0  # 0 for 1(...).ft2
 endfid = 178
 
@@ -40,14 +35,12 @@ rows = 14
 """
 Plot parameters
 """
-#rcParams['axes.labelsize'] = 12
 rcParams['axes.titlesize'] = 8
 rcParams['xtick.labelsize'] = 0.5
 rcParams['ytick.labelsize'] = 0.5
 rcParams['font.family'] = 'serif'
 rcParams['font.serif'] = ['Times New Roman']
 rcParams['figure.figsize'] = 20, 20
-
 
 def calculateCountours(base_countour_level):
     """
@@ -64,11 +57,10 @@ def calculateCountours(base_countour_level):
     cl = contour_start * contour_factor ** np.arange(contour_num) 
     clneg = -cl[::-1]
 
-    print "[Amaterasux] Plotting positive contour levels:\n", cl
-    print "[Amaterasux] Plotting negative contour levels:\n", clneg
+    print "[ Amaplot ] Plotting positive contour levels:\n", cl
+    print "[ Amaplot ] Plotting negative contour levels:\n", clneg
 
     return cl, clneg, cmap, cmapneg
-
 
 def makePlot(datapath, startfid, endfid, cl, clneg, cmap, cmapneg):
     filecounter = startfid
@@ -88,7 +80,7 @@ def makePlot(datapath, startfid, endfid, cl, clneg, cmap, cmapneg):
                 Read in data using nmrglue
                 """
                 # read in the data from a NMRPipe file
-                filename = datapath + "/fid/" + str(filecounter) + ".fid_proc.ft2"
+                filename = datapath + "/fid/" + str(filecounter) + ".fid_proc.ft2" # Amaterasu filename
                 dic, data = ng.pipe.read(filename)
 
                 # make ppm scales
@@ -109,12 +101,13 @@ def makePlot(datapath, startfid, endfid, cl, clneg, cmap, cmapneg):
                 axes.contour(data, clneg, cmap=cmapneg, extent=(ppm_1h_0, ppm_1h_1, ppm_15n_0, ppm_15n_1), linewidths=0.03)
                 axes.set_xlim(w_1H + 0.1, w_1H - 0.1) # zoom on __expected__ proton chemical shift
 
-
     #params = {'mathtext.default': 'regular' }          
     #plt.rcParams.update(params)
 
     fig.savefig("spectrum.pdf")
 
-
+# Calculate contours
 cl, clneg, cmap, cmapneg = calculateCountours(base_countour_level)
+
+# Plot it!
 makePlot(datapath, startfid, endfid, cl, clneg, cmap, cmapneg)
