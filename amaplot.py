@@ -11,6 +11,9 @@ Plotting utility
 Last change: 2018-2-22
 """
 
+import matplotlib as mpl
+mpl.use('Agg')
+
 import nmrglue as ng
 import numpy as np
 import matplotlib.pyplot as plt
