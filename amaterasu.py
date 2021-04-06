@@ -16,16 +16,26 @@ Last change: 2021-3-23
 
 ./amaterasu.py --data=demo_screening -r -s
 
---data=1001       [screening data] directory. 
--r                run
--s                perform screening
+--data=1001         [screening data] directory. 
+-r                  run
+-s                  perform screening
+-m                  manual phase information
 
 ************** For full dataset processing **************  
 
 ./amaterasu.py --data=demo_full -m --p0=0 -r
 
---data=1000       [data] directory
--r                run
+--data=demo_full    [data] directory
+-r                  run
+-m                  manual phase information
+
+********** For full off-resonance R1rho data ************  
+
+./amaterasu.py --data=demo_offres -m --p0=0 -r -off
+
+--data=demo_offres  [data] directory
+-r                  run
+-m                  manual phase information
 
 *********************************************************
 """
