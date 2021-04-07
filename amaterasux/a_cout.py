@@ -25,4 +25,4 @@ def printParameters(self):
 
     nprint("15N hard pulse power  [dB]", self.N15pulseDB)
     nprint("15N hard pulse length [dB]", self.N15pulseLength)
-    nprint("15N spinlock length   [dB]", self.spinLockLength)
+    nprint("15N spinlock length   [ms]", self.spinLockLength * 1000)
