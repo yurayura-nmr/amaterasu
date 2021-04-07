@@ -37,7 +37,8 @@ def makeFidObjectsOffres(residue, experiment):
     0     --- the last experiment is reference again
     """
     start = (residue.index * fidsPerResidue) + 1  # 0th experiment is reference; 1st experiment is data
-    end = start + fidsPerResidue - 1
+    #end = start + fidsPerResidue - 1 
+    end = start + fidsPerResidue - 2
 
     for i in range(start, end):
         testFid = fid()
